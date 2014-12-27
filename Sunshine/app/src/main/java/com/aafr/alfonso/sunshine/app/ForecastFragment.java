@@ -4,6 +4,7 @@ package com.aafr.alfonso.sunshine.app;
  * Created by alfonso on 25/12/14.
  */
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -15,8 +16,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -90,7 +93,19 @@ public class ForecastFragment extends Fragment {
 
         ListView lv = (ListView) rootView.findViewById(R.id.listview_forecast);
 
+
         lv.setAdapter(mForecastAdapter);
+
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+               String forecast = mForecastAdapter.getItem(position);
+                Toast.makeText(getActivity(),forecast,Toast.LENGTH_SHORT).show();
+
+                Intent iDA =new Intent(getActivity(),DetailActivity.class);
+                startActivity(iDA);
+            }
+        });
 
         return rootView;
     }
@@ -98,9 +113,9 @@ public class ForecastFragment extends Fragment {
 
     /**
      *
-     * @see
      *
-     * http://jsonformatter.curiousconcept.com
+     *
+     * @see android.os.AsyncTask http://jsonformatter.curiousconcept.com
      */
     public class FetchWeatherTask extends AsyncTask<String, Void, String[]> {
 
@@ -145,7 +160,7 @@ public class ForecastFragment extends Fragment {
 
                 URL url =new URL(builtUri.toString());
 
-                Log.v(LOG_TAG,"URI: "+builtUri.toString());
+                //Log.v(LOG_TAG,"URI: "+builtUri.toString());
 
                 // Create the request to OpenWeatherMap, and open the connection
                 urlConnection = (HttpURLConnection) url.openConnection();
@@ -175,7 +190,7 @@ public class ForecastFragment extends Fragment {
                 }
                 forecastJsonStr = buffer.toString();
 
-                Log.v(LOG_TAG, "Forecast JSON: " + forecastJsonStr);
+                //Log.v(LOG_TAG, "Forecast JSON: " + forecastJsonStr);
 
 
 
@@ -211,12 +226,12 @@ public class ForecastFragment extends Fragment {
         }
 
         @Override
-        protected void onPostExecute(String[] strings) {
-            //super.onPostExecute(strings);
+        protected void onPostExecute(String[] result) {
 
-            mForecastAdapter.clear();
-            mForecastAdapter.addAll(Arrays.asList(strings));
-
+            if(result!=null) {
+                mForecastAdapter.clear();
+                mForecastAdapter.addAll(Arrays.asList(result));
+            }
         }
 
 
@@ -296,9 +311,9 @@ public class ForecastFragment extends Fragment {
             }
 
 
-            for(String s:resultStrs){
-                Log.v(LOG_TAG,"Forecast entry: "+s);
-            }
+            // for(String s:resultStrs){
+            //     Log.v(LOG_TAG,"Forecast entry: "+s);
+            // }
 
             return resultStrs;
         }
