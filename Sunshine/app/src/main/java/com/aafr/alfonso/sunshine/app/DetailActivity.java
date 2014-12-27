@@ -1,5 +1,6 @@
 package com.aafr.alfonso.sunshine.app;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -10,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.os.Build;
+import android.widget.TextView;
 
 
 public class DetailActivity extends ActionBarActivity {
@@ -56,7 +58,7 @@ public class DetailActivity extends ActionBarActivity {
     /**
      * A placeholder fragment containing a simple view.
      */
-    public static class PlaceholderFragment extends Fragment {
+    public class PlaceholderFragment extends Fragment {
 
         public PlaceholderFragment() {
         }
@@ -65,6 +67,16 @@ public class DetailActivity extends ActionBarActivity {
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_detail, container, false);
+
+            Intent intent =getActivity().getIntent();
+
+            if(intent!= null && intent.hasExtra(Intent.EXTRA_TEXT)) {
+
+                String mess = intent.getStringExtra(Intent.EXTRA_TEXT);
+
+                ((TextView)rootView.findViewById(R.id.detail_text)).setText(mess);
+
+            }
             return rootView;
         }
     }

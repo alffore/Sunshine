@@ -103,6 +103,8 @@ public class ForecastFragment extends Fragment {
                 Toast.makeText(getActivity(),forecast,Toast.LENGTH_SHORT).show();
 
                 Intent iDA =new Intent(getActivity(),DetailActivity.class);
+
+                iDA.putExtra(Intent.EXTRA_TEXT,forecast);
                 startActivity(iDA);
             }
         });
