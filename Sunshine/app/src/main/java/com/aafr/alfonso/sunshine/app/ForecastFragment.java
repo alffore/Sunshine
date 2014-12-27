@@ -41,6 +41,7 @@ public class ForecastFragment extends Fragment {
 
     ArrayAdapter<String> mForecastAdapter;
 
+
     public ForecastFragment() {
     }
 
@@ -81,7 +82,7 @@ public class ForecastFragment extends Fragment {
                 "Today - Sunny - 88/63"
         };
 
-        List<String> weekForecast = new ArrayList(Arrays.asList(forecastArray));
+        List<String>  weekForecast = new ArrayList(Arrays.asList(forecastArray));
 
 
         mForecastAdapter = new ArrayAdapter<String>(getActivity(),
@@ -209,6 +210,14 @@ public class ForecastFragment extends Fragment {
 
         }
 
+        @Override
+        protected void onPostExecute(String[] strings) {
+            //super.onPostExecute(strings);
+
+            mForecastAdapter.clear();
+            mForecastAdapter.addAll(Arrays.asList(strings));
+
+        }
 
 
         /* The date/time conversion code is going to be moved outside the asynctask later,
