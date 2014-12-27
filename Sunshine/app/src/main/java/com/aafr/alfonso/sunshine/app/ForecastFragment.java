@@ -117,7 +117,9 @@ public class ForecastFragment extends Fragment {
      *
      *
      *
-     * @see android.os.AsyncTask http://jsonformatter.curiousconcept.com
+     * @see android.os.AsyncTask
+     *
+     * Revisa <a href="http://jsonformatter.curiousconcept.com">JSON formater</a>
      */
     public class FetchWeatherTask extends AsyncTask<String, Void, String[]> {
 
