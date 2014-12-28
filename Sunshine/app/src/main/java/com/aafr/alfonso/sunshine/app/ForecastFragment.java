@@ -84,17 +84,14 @@ private void updateWeather(){
     SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
     String location=prefs.getString(getString(R.string.pref_location_key),
             getString(R.string.pref_location_default));
-    weatherTask.execute(location);
+    String units = prefs.getString(getString(R.string.pref_units_key),getString(R.string.pref_units_default));
+    weatherTask.execute(location,units);
 }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-
-
-
-
 
         mForecastAdapter = new ArrayAdapter<String>(getActivity(),
                 R.layout.list_item_forecast, R.id.list_item_forecast_textview, new ArrayList<String>());
@@ -128,9 +125,7 @@ private void updateWeather(){
 
 
     /**
-     *
-     *
-     *
+*
      * @see android.os.AsyncTask
      *
      * Revisa <a href="http://jsonformatter.curiousconcept.com">JSON formater</a>
@@ -157,7 +152,6 @@ private void updateWeather(){
 
             try {
 
-
                 // Construct the URL for the OpenWeatherMap query
                 // Possible parameters are available at OWM's forecast API page, at
                 // http://openweathermap.org/API#forecast
@@ -172,7 +166,7 @@ private void updateWeather(){
                 Uri builtUri = Uri.parse(FORECAST_BASE_URL).buildUpon()
                         .appendQueryParameter(QUERY_PARAM,params[0])
                         .appendQueryParameter(FORMAT_PARAM,format)
-                        .appendQueryParameter(UNITS_PARAM,units)
+                        .appendQueryParameter(UNITS_PARAM,params[1])
                         .appendQueryParameter(DAYS_PARAM,Integer.toString(numDays))
                         .build();
 
@@ -209,8 +203,6 @@ private void updateWeather(){
                 forecastJsonStr = buffer.toString();
 
                 //Log.v(LOG_TAG, "Forecast JSON: " + forecastJsonStr);
-
-
 
             } catch (IOException e) {
                 Log.e(LOG_TAG, "Error ", e);

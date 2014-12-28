@@ -1,6 +1,7 @@
 package com.aafr.alfonso.sunshine.app;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
@@ -53,8 +54,25 @@ public class MainActivity extends ActionBarActivity {
             return true;
         }
 
+        if(id == R.id.action_map){
+
+
+
+        }
+
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Metodo para mostrar la geolocalizacion 
+     * @param geoLocation
+     */
+    public void showMap(Uri geoLocation) {
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(geoLocation);
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        }
+    }
 
 }
