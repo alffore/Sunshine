@@ -77,6 +77,10 @@ public class ForecastFragment extends Fragment {
         return super.onOptionsItemSelected(item);
     }
 
+
+
+
+
 private void updateWeather(){
     FetchWeatherTask weatherTask = new FetchWeatherTask();
 
