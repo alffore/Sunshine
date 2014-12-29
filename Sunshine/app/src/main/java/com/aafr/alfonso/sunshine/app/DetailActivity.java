@@ -17,9 +17,9 @@ import android.widget.TextView;
 
 public class DetailActivity extends ActionBarActivity {
 
-ShareActionProvider mShareActionProvider;
     private  static  final String LOG_TAG= DetailActivity.class.getSimpleName();
-DetailFragment detailFragment;
+    ShareActionProvider mShareActionProvider;
+    DetailFragment detailFragment;
     public DetailActivity(){
 
     }
