@@ -19,4 +19,6 @@
     <string name="pref_units_key" translatable="false">units</string>
     <string name="pref_units_default" translatable="false">metric</string>
     <string name="pref_units_type">Units type</string>
+
+    <string name="share">Share</string>
 </resources>
