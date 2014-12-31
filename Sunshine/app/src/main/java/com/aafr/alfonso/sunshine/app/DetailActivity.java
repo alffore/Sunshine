@@ -14,7 +14,9 @@ import android.view.ViewGroup;
 import android.support.v7.widget.ShareActionProvider;
 import android.widget.TextView;
 
-
+/**
+ *
+ */
 public class DetailActivity extends ActionBarActivity {
 
     private  static  final String LOG_TAG= DetailActivity.class.getSimpleName();
@@ -24,6 +26,10 @@ public class DetailActivity extends ActionBarActivity {
 
     }
 
+    /**
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,7 +43,11 @@ public class DetailActivity extends ActionBarActivity {
         }
     }
 
-
+    /**
+     *
+     * @param menu
+     * @return
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -56,6 +66,11 @@ public class DetailActivity extends ActionBarActivity {
     }
 
 
+    /**
+     *
+     * @param item
+     * @return
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -105,6 +120,10 @@ public class DetailActivity extends ActionBarActivity {
             return rootView;
         }
 
+        /**
+         *
+         * @return
+         */
         public Intent createShareForecastIntent(){
             Intent shareIntent = new Intent(Intent.ACTION_SEND);
             shareIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
