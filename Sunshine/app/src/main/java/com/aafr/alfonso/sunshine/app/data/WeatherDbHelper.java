@@ -14,11 +14,16 @@ import com.aafr.alfonso.sunshine.app.data.WeatherContract.WeatherEntry;
  */
 public class WeatherDbHelper extends SQLiteOpenHelper {
 
+    public static final String DATABASE_NAME = "weather.db";
     // If you change the database schema, you must increment the database version.
     private static final int DATABASE_VERSION = 1;
 
-    public static final String DATABASE_NAME = "weather.db";
-
+    /**
+     * @param context
+     * @param name
+     * @param factory
+     * @param version
+     */
     public WeatherDbHelper(Context context, String name, SQLiteDatabase.CursorFactory factory,
                            int version) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -34,9 +39,8 @@ public class WeatherDbHelper extends SQLiteOpenHelper {
                 LocationEntry.COLUMN_CITY_NAME + " TEXT NOT NULL, " +
                 LocationEntry.COLUMN_COORD_LAT + " REAL NOT NULL, " +
                 LocationEntry.COLUMN_COORD_LONG + " REAL NOT NULL, " +
-                "UNIQUE (" + LocationEntry.COLUMN_LOCATION_SETTING +") ON CONFLICT IGNORE"+
+                "UNIQUE (" + LocationEntry.COLUMN_LOCATION_SETTING + ") ON CONFLICT IGNORE" +
                 " );";
-
 
 
         final String SQL_CREATE_WEATHER_TABLE = "CREATE TABLE " + WeatherEntry.TABLE_NAME + " (" +
