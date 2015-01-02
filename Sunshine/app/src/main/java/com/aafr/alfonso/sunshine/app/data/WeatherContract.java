@@ -58,7 +58,7 @@ public class WeatherContract {
         public static final String COLUMN_COORD_LONG = "coord_long";
 
 
-public static Uri buildLocationById(long id){
+        public static Uri buildLocationUri(long id){
     return ContentUris.withAppendedId(CONTENT_URI, id);
 }
 
