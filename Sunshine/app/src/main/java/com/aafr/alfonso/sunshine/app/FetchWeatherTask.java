@@ -14,7 +14,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 import android.util.Log;
-import android.widget.ArrayAdapter;
+
 
 import com.aafr.alfonso.sunshine.app.data.WeatherContract;
 import com.aafr.alfonso.sunshine.app.data.WeatherContract.LocationEntry;
