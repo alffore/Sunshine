@@ -123,6 +123,7 @@ public class ForecastFragment extends Fragment implements LoaderCallbacks<Cursor
                     startActivity(intent);
                 }
             }
+
         });
 
         return rootView;
