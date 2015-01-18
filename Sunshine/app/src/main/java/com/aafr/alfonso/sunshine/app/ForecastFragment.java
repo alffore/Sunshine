@@ -1,19 +1,27 @@
+/*
+ * Copyright (C) 2014 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.aafr.alfonso.sunshine.app;
 
-/**
- * Created by alfonso on 25/12/14.
- */
-
-import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.LoaderManager;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
-import android.support.v4.widget.SimpleCursorAdapter;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -21,19 +29,17 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
-
-
-import java.util.Date;
-
 
 import com.aafr.alfonso.sunshine.app.data.WeatherContract;
 import com.aafr.alfonso.sunshine.app.data.WeatherContract.LocationEntry;
 import com.aafr.alfonso.sunshine.app.data.WeatherContract.WeatherEntry;
 
+import java.util.Date;
 
+/**
+ * Encapsulates fetching the forecast and displaying it as a {@link android.widget.ListView} layout.
+ */
 public class ForecastFragment extends Fragment implements LoaderCallbacks<Cursor> {
 
     private ForecastAdapter mForecastAdapter;
@@ -41,6 +47,7 @@ public class ForecastFragment extends Fragment implements LoaderCallbacks<Cursor
     private String mLocation;
     private ListView mListView;
     private int mPosition = ListView.INVALID_POSITION;
+    private boolean mUseTodayLayout;
 
     private static final String SELECTED_KEY = "selected_position";
 
@@ -152,6 +159,8 @@ public class ForecastFragment extends Fragment implements LoaderCallbacks<Cursor
             mPosition = savedInstanceState.getInt(SELECTED_KEY);
         }
 
+        mForecastAdapter.setUseTodayLayout(mUseTodayLayout);
+
         return rootView;
     }
 
@@ -227,5 +236,12 @@ public class ForecastFragment extends Fragment implements LoaderCallbacks<Cursor
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
         mForecastAdapter.swapCursor(null);
+    }
+
+    public void setUseTodayLayout(boolean useTodayLayout) {
+        mUseTodayLayout = useTodayLayout;
+        if (mForecastAdapter != null) {
+            mForecastAdapter.setUseTodayLayout(mUseTodayLayout);
+        }
     }
 }
